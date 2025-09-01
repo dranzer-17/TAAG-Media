@@ -1,124 +1,125 @@
-# Taag Media "Match & Bill" API - Backend
+# Taag Media: Full-Stack "Match & Bill" Platform
 
-This repository contains the backend service for the Taag Media Full-Stack Internship take-home assignment. It is a FastAPI application that provides two core functionalities: a creator-brand matching engine and a billing information processing system.
-
-## Features
-
--   **Creator Matching Engine**: Accepts a brand's campaign brief and returns a ranked list of suitable creators.
--   **Weighted Scoring Algorithm**: Ranks creators based on a detailed algorithm considering:
-    -   Relevance (Verticals & Tone) - 40%
-    -   Audience Fit (Geography & Age) - 30%
-    -   Performance & Price (Engagement & Value) - 20%
-    -   Constraints (Budget, Platforms) - 10%
--   **Diversification Logic**: Adjusts top results to prevent a single sub-vertical from dominating the recommendations.
--   **Billing & Payout APIs**: Securely processes and validates brand and creator financial details.
--   **Server-Side Validation**: Robust, format-specific validation for critical identifiers like GSTIN, PAN, and IFSC.
--   **Automated API Documentation**: Interactive API documentation available via Swagger UI (`/docs`) and ReDoc (`/redoc`).
-
-## Tech Stack
-
--   **Framework**: FastAPI
--   **Data Validation**: Pydantic V2
--   **Database ORM**: SQLAlchemy
--   **Database**: SQLite (for simplicity and portability)
--   **Server**: Uvicorn
-
-## Project Structure
-  backend/├── app/│   ├── crud.py           # Database interaction functions (CRUD)│   ├── database.py       # Database engine and session setup│   ├── main.py           # FastAPI app and API endpoint definitions│   ├── models.py         # SQLAlchemy DB table models│   ├── schemas.py        # Pydantic data schemas for API I/O and validation│   ├── scoring.py        # Core logic for the matching algorithm│   ├── seed.py           # Script to populate the DB with sample data│   └── validation.py     # Validation helper functions│├── data/│   ├── brands.json       # Sample brand data│   └── creators.json     # Sample creator data│├── taag.db               # SQLite database file (auto-generated)└── requirements.txt      # Project dependencies code Codedownloadcontent_copyexpand_lessIGNORE_WHEN_COPYING_STARTIGNORE_WHEN_COPYING_END    ## Setup and Installation
-
-**1. Clone the repository:**
-```bash
-git clone <your-repo-url>
-cd backend
-  2. Create and activate a Python virtual environment: code Bashdownloadcontent_copyexpand_lessIGNORE_WHEN_COPYING_STARTIGNORE_WHEN_COPYING_END    # For macOS/Linux
-python3 -m venv venv
-source venv/bin/activate
-
-# For Windows
-python -m venv venv
-.\venv\Scripts\activate
-  3. Install dependencies: code Bashdownloadcontent_copyexpand_lessIGNORE_WHEN_COPYING_STARTIGNORE_WHEN_COPYING_END    pip install -r requirements.txt
-  Running the Application1. Seed the Database:Before running the server for the first time, populate the database with the sample data.```bashpython -m app.seed code Codedownloadcontent_copyexpand_lessIGNORE_WHEN_COPYING_STARTIGNORE_WHEN_COPYING_END    **2. Start the Development Server:**
-```bash
-uvicorn app.main:app --reload
-  The API will be live at http://127.0.0.1:8000.API EndpointsThe interactive Swagger documentation at http://127.0.0.1:8000/docs is the best way to test the endpoints.Creator MatchingPOST /api/matchCalculates and returns a ranked list of creators based on a brand brief.Request Body: code JSONdownloadcontent_copyexpand_lessIGNORE_WHEN_COPYING_STARTIGNORE_WHEN_COPYING_END    {
-  "category": "Fashion",
-  "budgetINR": 500000,
-  "targetLocations": ["Mumbai", "Delhi"],
-  "targetAges":,
-  "tone": ["energetic", "fun"],
-  "platforms": ["Instagram"],
-  "constraints": {
-    "noAdultContent": true
-  }
-}
-  Successful Response (200 OK): code JSONdownloadcontent_copyexpand_lessIGNORE_WHEN_COPYING_STARTIGNORE_WHEN_COPYING_END    [
-  {
-    "creator": {
-      "handle": "@fitwithria",
-      // ... other creator details
-    },
-    "score": 85.5,
-    "reasons": ["Primary Vertical Match", "Strong Audience Overlap", "..."]
-  }
-]
-  Billing and PayoutsPOST /api/billing/brandValidates and accepts brand billing details. Calculates and returns a GST summary.Request Body: code JSONdownloadcontent_copyexpand_lessIGNORE_WHEN_COPYING_STARTIGNORE_WHEN_COPYING_END    {
-  "companyName": "Acme Corp",
-  "gstin": "29ABCDE1234F1Z5",
-  "address": "123 Main St, Anytown",
-  "email": "billing@acme.com",
-  "phone": "9876543210",
-  "budget": 100000
-}```
-**Successful Response (200 OK):**
-```json
-{
-  "status": "success",
-  "message": "Brand billing details received and validated.",
-  "submitted_details": { "..." },
-  "billing_summary": {
-    "budget": "INR 100,000.00",
-    "gst_18_percent": "INR 18,000.00",
-    "total_payable": "INR 118,000.00"
-  }
-}```
-**Error Response (422 Unprocessable Entity):**
-Triggered by invalid data formats (e.g., incorrect GSTIN).
+This repository contains the complete full-stack solution for the internship assignment from **Taag Media**. The project, themed "Match & Bill," is a fully-featured platform designed to connect brands with creators and streamline the billing process. It was built from the ground up, incorporating a modern tech stack and focusing on a professional, clean user experience.
 
 ---
 
-#### `POST /api/billing/creator`
-Validates and accepts creator payout details.
+## 🚀 Project Demo
 
-**Request Body:**
-```json
-{
-  "name": "Ria Fitness",
-  "pan": "ABCDE1234F",
-  "upi": "ria@okbank",
-  "bankAccount": "123456789012",
-  "ifsc": "HDFC0000123",
-  "address": "456 Park Ave, Anytown"
-}
-  Successful Response (200 OK): code JSONdownloadcontent_copyexpand_lessIGNORE_WHEN_COPYING_STARTIGNORE_WHEN_COPYING_END    {
-  "status": "success",
-  "message": "Creator payout details received and validated.",
-  "submitted_details": { "..." }
-}
-  Error Response (422 Unprocessable Entity):Triggered by invalid data formats (e.g., incorrect PAN or IFSC). code Codedownloadcontent_copyexpand_lessIGNORE_WHEN_COPYING_STARTIGNORE_WHEN_COPYING_END    ---
+The video below demonstrates the complete user flow, from the interactive landing page and authentication to submitting a brand brief, viewing AI-matched creators, and completing the multi-step billing process with a final PDF preview.
 
-### 2. `.env.example`
+[![Project Demo](./demo_preview.png)](./demo.mp4)
 
-Although we use a hardcoded SQLite path for this project's simplicity, using a `.env` file is a best practice for production. Create a file named `.env.example` in the `backend` directory.
+> **Note:** To view the demo, click the image above. You may need to download the `demo.mp4` file from the repository if your browser doesn't play it directly. *(**Instructions for you:** Take an exciting screenshot of your application, save it as `demo_preview.png` in this root directory, and the link above will work automatically.)*
 
-```ini
-# Environment variables for the application
-# For production, you would swap this out for a PostgreSQL or MySQL connection string.
-# Example: DATABASE_URL="postgresql://user:password@postgresserver/db"
+---
 
-DATABASE_URL="sqlite:///./taag.db"
-  (Note: Our current code in database.py doesn't actually read this file, but it's crucial to include it to show you know how production configuration works.)3. requirements.txtFor the evaluators to easily install the correct dependencies, a requirements.txt file is necessary. Create this file in the backend directory. code Textdownloadcontent_copyexpand_lessIGNORE_WHEN_COPYING_STARTIGNORE_WHEN_COPYING_END    fastapi==0.103.1
-uvicorn[standard]==0.23.2
-sqlalchemy==2.0.21
-pydantic==2.4.2
-  (These are recent, stable versions of the libraries we used. You can also generate this file automatically by running pip freeze > requirements.txt from your activated virtual environment.)
+## ✨ Core Features
+
+### Full-Stack & General
+- **Full User Authentication:** Secure sign-up, sign-in, and "Continue with Google" OAuth powered by Supabase.
+- **Protected Routes:** The main dashboard is only accessible to authenticated users.
+- **Dark/Light Mode:** A sleek, modern UI with a theme toggle for user preference.
+- **Professional UI/UX:** A clean, app-like interface with a collapsible sidebar, tooltips, and a focus on a smooth user experience.
+- **Extra Polish:** Includes a dynamic "Splash Cursor" effect on the landing page for a memorable first impression.
+
+### Frontend (Next.js)
+- **Interactive Brand Brief Form:** A comprehensive form with robust client-side validation using `Zod` and `react-hook-form`.
+- **Dynamic Match Console:** Displays a ranked list of creators fetched live from the backend, complete with match scores, progress bars, and reason badges.
+- **Multi-Step Billing Flow:** A guided, two-step process to capture brand and creator financial details.
+- **Advanced PDF Generation:** Generates a clean, professional PDF summary of billing details with a live preview in a modal, powered by `@react-pdf/renderer`.
+- **Component-Based & Typed:** Built with TypeScript and Shadcn/ui for a fully-typed, maintainable, and beautiful component library.
+
+### Backend (FastAPI)
+- **Weighted Creator Matching Algorithm:** A sophisticated scoring engine that ranks creators based on relevance (40%), audience fit (30%), performance/price (20%), and constraints (10%).
+- **Diversification Logic:** Prevents a single creator vertical from dominating the top recommendations.
+- **Secure Server-Side Validation:** Ensures the integrity of critical financial identifiers like GSTIN, PAN, and IFSC codes.
+-   **Automated API Documentation**: Interactive API docs are automatically generated by FastAPI (Swagger UI).
+
+---
+
+## 🛠️ Tech Stack
+
+| Frontend                                                                                                                                                                                                                                                   | Backend                                                                                                                                                                 |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)                                                    | ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi) ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python) |
+| ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)                       | ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?style=for-the-badge&logo=sqlalchemy) ![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white) |
+| ![Shadcn/ui](https://img.shields.io/badge/shadcn/ui-000000?style=for-the-badge&logo=shadcnui&logoColor=white) ![Zod](https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white)                                                     | ![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=pydantic)                                                                               |
+| ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)                                                |                                                                                                                                                                         |
+
+---
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+-   Node.js (v18 or newer)
+-   Python (v3.9 or newer)
+-   A Supabase account for authentication.
+
+### Local Setup
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repo-url>
+    cd TAAG_Media
+    ```
+
+2.  **Setup the Backend:**
+    ```bash
+    cd backend
+
+    # Create and activate a virtual environment
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+
+    # Install dependencies
+    pip install -r requirements.txt
+
+    # Seed the database with sample data
+    python -m app.seed
+    ```
+
+3.  **Setup the Frontend:**
+    - You will need your **Supabase Project URL** and **Anon Key**. Find them in your Supabase project under `Settings > API`.
+    - You will also need to set up **Google OAuth** credentials from the Google Cloud Console.
+    ```bash
+    cd ../frontend
+
+    # Install dependencies
+    npm install
+
+    # Create the environment file
+    cp .env.local.example .env.local
+    ```
+    - Now, open the newly created `.env.local` file and add your Supabase and Google credentials.
+
+4.  **Run the Application:**
+    - **Terminal 1 (for Backend):**
+        ```bash
+        cd backend
+        source venv/bin/activate
+        uvicorn app.main:app --reload
+        ```
+        > The backend will be running at `http://127.0.0.1:8000`
+
+    - **Terminal 2 (for Frontend):**
+        ```bash
+        cd frontend
+        npm run dev
+        ```
+        > The frontend will be live at `http://localhost:3000`
+
+### How to Use
+
+1.  Visit `http://localhost:3000` to see the landing page.
+2.  Click "Get Started" or "Login".
+3.  Sign up or sign in using email or the Google provider.
+4.  You will be automatically redirected to the protected dashboard.
+5.  Use the sidebar to navigate between the **Brand Brief**, **Match Console**, and **Billing** sections.
+6.  Fill out the Brand Brief form and click "Find Creators" to see the live API in action.
+7.  Complete the multi-step billing flow to generate a downloadable PDF summary.
+
+---
+
+Thank you for the opportunity to work on this assignment!

@@ -13,31 +13,35 @@ import {
   Star
 } from "lucide-react";
 import Link from "next/link";
+import SplashCursor from '@/components/SplashCursor'
+
+
 
 export default function Home() {
   return (
+    
     <div className="min-h-screen w-full bg-gradient-to-br from-background via-background to-muted/20">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
-        <nav className="container mx-auto px-6 py-4">
+        <nav className="container mx-auto px-4 sm:px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
               <div className="relative">
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
               </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                 Taag Media
               </h1>
             </div>
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" className="hover:bg-muted/50 transition-colors">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Button variant="ghost" className="hidden sm:inline-flex hover:bg-muted/50 transition-colors">
                 Features
               </Button>
-              <Button variant="ghost" className="hover:bg-muted/50 transition-colors">
+              <Button variant="ghost" className="hidden sm:inline-flex hover:bg-muted/50 transition-colors">
                 About
               </Button>
               <Link href="/login">
-                <Button variant="outline" className="border-border/50 hover:bg-muted/50">
+                <Button variant="outline" className="border-border/50 hover:bg-muted/50 text-xs sm:text-sm px-3 sm:px-4">
                   Sign In
                 </Button>
               </Link>
@@ -46,20 +50,20 @@ export default function Home() {
           </div>
         </nav>
       </header>
-
+      <SplashCursor />
       {/* Hero Section */}
-      <section className="container mx-auto px-6 pt-20 pb-32">
+      <section className="container mx-auto px-4 sm:px-6 pt-12 sm:pt-20 pb-20 sm:pb-32">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border/50 mb-8">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-muted/50 border border-border/50 mb-6 sm:mb-8">
             <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-            <span className="text-sm font-medium text-muted-foreground">
+            <span className="text-xs sm:text-sm font-medium text-muted-foreground">
               AI-Powered Creator Matching Platform
             </span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-4 sm:mb-6 px-4 sm:px-0">
             <span className="bg-gradient-to-r from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent">
               Connect Brands with
             </span>
@@ -70,36 +74,36 @@ export default function Home() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4 sm:px-0">
             Leverage AI to discover, match, and manage creator partnerships that drive real results. 
             Streamlined billing and payments included.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Link href="/login">
-              <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-12 sm:mb-16 px-4 sm:px-0">
+            <Link href="/login" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full sm:w-auto bg-foreground text-background hover:bg-foreground/90 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 Start Matching Now
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 sm:h-5 w-4 sm:w-5" />
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="border-border/50 hover:bg-muted/50 transition-colors">
+            <Button size="lg" variant="outline" className="w-full sm:w-auto border-border/50 hover:bg-muted/50 transition-colors">
               Watch Demo
             </Button>
           </div>
 
           {/* Social Proof */}
-          <div className="flex flex-wrap justify-center items-center gap-8 text-muted-foreground text-sm">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-8 text-muted-foreground text-xs sm:text-sm px-4 sm:px-0">
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-emerald-500" />
+              <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" />
               <span>10,000+ Active Creators</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-emerald-500" />
+              <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" />
               <span>500+ Brands Trust Us</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-emerald-500" />
+              <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" />
               <span>98% Match Success Rate</span>
             </div>
           </div>
@@ -107,17 +111,17 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="container mx-auto px-6 pb-32">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+      <section className="container mx-auto px-4 sm:px-6 pb-20 sm:pb-32">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent px-4 sm:px-0">
             Everything You Need to Scale
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4 sm:px-0">
             From intelligent matching to seamless payments, we've built the complete creator marketing solution.
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0">
           <FeatureCard
             icon={<Zap className="h-6 w-6" />}
             title="AI-Powered Matching"
@@ -158,9 +162,9 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="container mx-auto px-6 pb-32">
-        <div className="rounded-3xl bg-gradient-to-r from-muted/30 via-muted/50 to-muted/30 border border-border/50 p-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <section className="container mx-auto px-4 sm:px-6 pb-20 sm:pb-32">
+        <div className="rounded-2xl sm:rounded-3xl bg-gradient-to-r from-muted/30 via-muted/50 to-muted/30 border border-border/50 p-6 sm:p-12 mx-4 sm:mx-0">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center">
             <StatItem number="10K+" label="Active Creators" />
             <StatItem number="500+" label="Happy Brands" />
             <StatItem number="98%" label="Match Success" />
@@ -171,18 +175,18 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-border/50 bg-muted/20">
-        <div className="container mx-auto px-6 py-12">
+        <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <span className="text-lg font-semibold">Taag Media</span>
+              <span className="text-base sm:text-lg font-semibold">Taag Media</span>
             </div>
-            <div className="flex items-center gap-6 text-sm text-muted-foreground">
+            <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
               <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
               <a href="#" className="hover:text-foreground transition-colors">Terms</a>
               <a href="#" className="hover:text-foreground transition-colors">Contact</a>
             </div>
           </div>
-          <div className="mt-8 pt-8 border-t border-border/50 text-center text-sm text-muted-foreground">
+          <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-border/50 text-center text-xs sm:text-sm text-muted-foreground">
             © 2024 Taag Media. All rights reserved. Built for the future of creator marketing.
           </div>
         </div>
@@ -204,12 +208,12 @@ function FeatureCard({
 }) {
   return (
     <div className="group relative">
-      <div className="relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-8 transition-all duration-300 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 hover:border-border">
-        <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${gradient} text-white mb-6 shadow-lg`}>
+      <div className="relative rounded-xl sm:rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 sm:p-8 transition-all duration-300 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 hover:border-border">
+        <div className={`inline-flex p-2 sm:p-3 rounded-lg sm:rounded-xl bg-gradient-to-r ${gradient} text-white mb-4 sm:mb-6 shadow-lg`}>
           {icon}
         </div>
-        <h3 className="text-xl font-semibold text-foreground mb-3">{title}</h3>
-        <p className="text-muted-foreground leading-relaxed">{description}</p>
+        <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3">{title}</h3>
+        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{description}</p>
       </div>
     </div>
   );
@@ -218,8 +222,8 @@ function FeatureCard({
 function StatItem({ number, label }: { number: string; label: string }) {
   return (
     <div>
-      <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">{number}</div>
-      <div className="text-muted-foreground text-sm font-medium">{label}</div>
+      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-1 sm:mb-2">{number}</div>
+      <div className="text-muted-foreground text-xs sm:text-sm font-medium">{label}</div>
     </div>
   );
 }
