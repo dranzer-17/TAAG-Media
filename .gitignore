@@ -47,6 +47,7 @@ taag.db
 # --- Environment Variables ---
 # Ignore all .env files to keep secrets and local configs out of git
 .env
+.env.local
 .env.*
 # But DO commit the example file
 ! .env.example
