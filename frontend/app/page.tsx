@@ -125,7 +125,7 @@ export default function Home() {
           <FeatureCard
             icon={<Zap className="h-6 w-6" />}
             title="AI-Powered Matching"
-            description="Our advanced algorithm analyzes 50+ data points to find creators that perfectly align with your brand's voice, audience, and goals."
+            description="Our advanced algorithm analyzes 50+ data points to find creators that perfectly align with your brand&rsquo;s voice, audience, and goals."
             gradient="from-blue-500 to-cyan-500"
           />
           <FeatureCard

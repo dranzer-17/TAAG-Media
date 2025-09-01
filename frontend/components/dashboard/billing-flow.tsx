@@ -54,7 +54,7 @@ export function BillingFlow() {
           <Card>
             <CardHeader>
               <CardTitle>Brand Billing Details</CardTitle>
-              <CardDescription>Enter the company's information for invoicing.</CardDescription>
+              <CardDescription>Enter the company&rsquo;s information for invoicing.</CardDescription>
             </CardHeader>
             <CardContent>
               <BrandBillingForm onBrandSubmit={handleBrandFormSubmit} />
@@ -66,7 +66,7 @@ export function BillingFlow() {
           <Card>
             <CardHeader>
               <CardTitle>Creator Payout Details</CardTitle>
-              <CardDescription>Enter the creator's information for payment processing.</CardDescription>
+              <CardDescription>Enter the creator&rsquo;s information for payment processing.</CardDescription>
             </CardHeader>
             <CardContent>
               <CreatorPayoutForm 
