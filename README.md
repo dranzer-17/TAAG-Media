@@ -61,7 +61,7 @@ The video below demonstrates the complete user flow, from the interactive landin
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
+    git clone https://github.com/dranzer-17/TAAG-Media
     cd TAAG_Media
     ```
 
