@@ -195,6 +195,13 @@ export default function DashboardPage() {
   );
 }
 
+interface SidebarButtonProps {
+  icon: React.ElementType;
+  label: string;
+  isActive?: boolean;
+  onClick: () => void;
+  isCollapsed: boolean;
+}
 // Reusable Sidebar Button Component
 function SidebarButton({ icon: Icon, label, isActive, onClick, isCollapsed }: any) {
   const content = (
