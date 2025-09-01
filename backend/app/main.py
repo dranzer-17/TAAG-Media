@@ -1,6 +1,7 @@
 # backend/app/main.py
 
 from fastapi import FastAPI, Depends, Body
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
 # Add the new validation import
@@ -14,6 +15,15 @@ app = FastAPI(
     title="Taag Media Match & Bill API",
     description="Backend service for the Match & Bill take-home assignment.",
     version="1.0.0"
+)
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # --- Dependency ---
