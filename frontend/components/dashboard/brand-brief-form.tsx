@@ -92,22 +92,36 @@ export function BrandBriefForm({ onFormSubmit }: BrandBriefFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-10">
           {/* --- LEFT COLUMN --- */}
-          <div className="space-y-8">
+          <div className="space-y-6">
+            <div className="pb-3">
+              <h3 className="text-lg font-semibold text-foreground">Campaign Details</h3>
+              <p className="text-sm text-muted-foreground">Basic information about your campaign</p>
+            </div>
             <FormField control={form.control} name="name" render={({ field }) => (
               <FormItem>
-                <FormLabel>Campaign Name</FormLabel>
-                <FormControl><Input placeholder="e.g., Summer Activewear Launch" {...field} /></FormControl>
+                <FormLabel className="text-base font-medium">Campaign Name</FormLabel>
+                <FormControl>
+                  <Input 
+                    placeholder="e.g., Summer Activewear Launch" 
+                    className="h-11 border-2 focus:border-primary transition-colors" 
+                    {...field} 
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )} />
 
             <FormField control={form.control} name="category" render={({ field }) => (
               <FormItem>
-                <FormLabel>Category</FormLabel>
+                <FormLabel className="text-base font-medium">Category</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl><SelectTrigger><SelectValue placeholder="Select a campaign category" /></SelectTrigger></FormControl>
+                  <FormControl>
+                    <SelectTrigger className="h-11 border-2 focus:border-primary transition-colors">
+                      <SelectValue placeholder="Select a campaign category" />
+                    </SelectTrigger>
+                  </FormControl>
                   <SelectContent>
                     <SelectItem value="Fashion">Fashion</SelectItem>
                     <SelectItem value="Fintech">Fintech</SelectItem>
@@ -122,30 +136,44 @@ export function BrandBriefForm({ onFormSubmit }: BrandBriefFormProps) {
 
             <FormField control={form.control} name="budget" render={({ field }) => (
               <FormItem>
-                <FormLabel>Budget (INR)</FormLabel>
+                <FormLabel className="text-base font-medium">Budget (INR)</FormLabel>
                 <FormControl>
-                  <Input 
-                    type="number" 
-                    placeholder="e.g., 500000" 
-                    value={field.value?.toString() || ""} 
-                    onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : 0)}
-                    onBlur={field.onBlur}
-                    name={field.name}
-                  />
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground font-medium">₹</span>
+                    <Input 
+                      type="number" 
+                      placeholder="500000" 
+                      className="h-11 pl-8 border-2 focus:border-primary transition-colors"
+                      value={field.value?.toString() || ""} 
+                      onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : 0)}
+                      onBlur={field.onBlur}
+                      name={field.name}
+                    />
+                  </div>
                 </FormControl>
-                <FormDescription>The total amount you want to spend.</FormDescription>
+                <FormDescription className="text-sm text-muted-foreground">The total amount you want to spend.</FormDescription>
                 <FormMessage />
               </FormItem>
             )} />
 
             <FormField control={form.control} name="ageRange" render={({ field }) => (
               <FormItem>
-                <FormLabel>Target Age Range: {field.value[0]} - {field.value[1]}</FormLabel>
+                <FormLabel className="text-base font-medium">Target Age Range: {field.value[0]} - {field.value[1]} years</FormLabel>
                 <FormControl>
-                  <Slider
-                    defaultValue={[18, 35]} min={13} max={65} step={1}
-                    value={field.value} onValueChange={field.onChange}
-                  />
+                  <div className="px-3 py-4">
+                    <Slider
+                      value={field.value} 
+                      onValueChange={field.onChange}
+                      max={65} 
+                      min={13} 
+                      step={1}
+                      className="w-full"
+                    />
+                    <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                      <span>13</span>
+                      <span>65</span>
+                    </div>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -153,79 +181,99 @@ export function BrandBriefForm({ onFormSubmit }: BrandBriefFormProps) {
           </div>
 
           {/* --- RIGHT COLUMN (Checkboxes) --- */}
-          <div className="space-y-8">
+          <div className="space-y-6">
+            <div className="pb-3">
+              <h3 className="text-lg font-semibold text-foreground">Targeting & Preferences</h3>
+              <p className="text-sm text-muted-foreground">Define your target audience and content preferences</p>
+            </div>
             <FormField control={form.control} name="locations" render={({ field }) => (
                 <FormItem>
-                    <FormLabel>Target Locations</FormLabel>
-                    <div className="grid grid-cols-2 gap-4">
-                        {locationsOptions.map((item) => (
-                            <FormItem key={item.id} className="flex flex-row items-start space-x-3 space-y-0">
-                                <FormControl>
-                                    <Checkbox checked={field.value?.includes(item.id)} onCheckedChange={(checked) => {
+                    <FormLabel className="text-base font-medium">Target Locations</FormLabel>
+                    <FormControl>
+                      <div className="grid grid-cols-2 gap-3 p-4 border rounded-lg bg-muted/20">
+                          {locationsOptions.map((item) => (
+                              <div key={item.id} className="flex items-center space-x-3 p-2 rounded-md hover:bg-muted/40 transition-colors">
+                                  <Checkbox 
+                                    checked={field.value?.includes(item.id)} 
+                                    onCheckedChange={(checked) => {
                                         return checked ? field.onChange([...(field.value || []), item.id]) : field.onChange(field.value?.filter((value) => value !== item.id))
-                                    }} />
-                                </FormControl>
-                                <FormLabel className="font-normal">{item.label}</FormLabel>
-                            </FormItem>
-                        ))}
-                    </div>
+                                    }} 
+                                    className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                                  />
+                                  <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">{item.label}</label>
+                              </div>
+                          ))}
+                      </div>
+                    </FormControl>
                     <FormMessage />
                 </FormItem>
             )} />
             
             <FormField control={form.control} name="goals" render={({ field }) => (
                 <FormItem>
-                    <FormLabel>Campaign Goals</FormLabel>
-                    <div className="grid grid-cols-2 gap-4">
-                        {goalsOptions.map((item) => (
-                            <FormItem key={item.id} className="flex flex-row items-start space-x-3 space-y-0">
-                                <FormControl>
-                                    <Checkbox checked={field.value?.includes(item.id)} onCheckedChange={(checked) => {
+                    <FormLabel className="text-base font-medium">Campaign Goals</FormLabel>
+                    <FormControl>
+                      <div className="grid grid-cols-2 gap-3 p-4 border rounded-lg bg-muted/20">
+                          {goalsOptions.map((item) => (
+                              <div key={item.id} className="flex items-center space-x-3 p-2 rounded-md hover:bg-muted/40 transition-colors">
+                                  <Checkbox 
+                                    checked={field.value?.includes(item.id)} 
+                                    onCheckedChange={(checked) => {
                                         return checked ? field.onChange([...(field.value || []), item.id]) : field.onChange(field.value?.filter((value) => value !== item.id))
-                                    }} />
-                                </FormControl>
-                                <FormLabel className="font-normal">{item.label}</FormLabel>
-                            </FormItem>
-                        ))}
-                    </div>
+                                    }} 
+                                    className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                                  />
+                                  <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">{item.label}</label>
+                              </div>
+                          ))}
+                      </div>
+                    </FormControl>
                     <FormMessage />
                 </FormItem>
             )} />
 
             <FormField control={form.control} name="tone" render={({ field }) => (
                 <FormItem>
-                    <FormLabel>Content Tone</FormLabel>
-                    <div className="grid grid-cols-2 gap-4">
-                        {toneOptions.map((item) => (
-                            <FormItem key={item.id} className="flex flex-row items-start space-x-3 space-y-0">
-                                <FormControl>
-                                    <Checkbox checked={field.value?.includes(item.id)} onCheckedChange={(checked) => {
+                    <FormLabel className="text-base font-medium">Content Tone</FormLabel>
+                    <FormControl>
+                      <div className="grid grid-cols-2 gap-3 p-4 border rounded-lg bg-muted/20">
+                          {toneOptions.map((item) => (
+                              <div key={item.id} className="flex items-center space-x-3 p-2 rounded-md hover:bg-muted/40 transition-colors">
+                                  <Checkbox 
+                                    checked={field.value?.includes(item.id)} 
+                                    onCheckedChange={(checked) => {
                                         return checked ? field.onChange([...(field.value || []), item.id]) : field.onChange(field.value?.filter((value) => value !== item.id))
-                                    }} />
-                                </FormControl>
-                                <FormLabel className="font-normal">{item.label}</FormLabel>
-                            </FormItem>
-                        ))}
-                    </div>
+                                    }} 
+                                    className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                                  />
+                                  <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">{item.label}</label>
+                              </div>
+                          ))}
+                      </div>
+                    </FormControl>
                     <FormMessage />
                 </FormItem>
             )} />
 
             <FormField control={form.control} name="platforms" render={({ field }) => (
                 <FormItem>
-                    <FormLabel>Platforms</FormLabel>
-                    <div className="grid grid-cols-2 gap-4">
-                        {platformsOptions.map((item) => (
-                            <FormItem key={item.id} className="flex flex-row items-start space-x-3 space-y-0">
-                                <FormControl>
-                                    <Checkbox checked={field.value?.includes(item.id)} onCheckedChange={(checked) => {
+                    <FormLabel className="text-base font-medium">Platforms</FormLabel>
+                    <FormControl>
+                      <div className="grid grid-cols-2 gap-3 p-4 border rounded-lg bg-muted/20">
+                          {platformsOptions.map((item) => (
+                              <div key={item.id} className="flex items-center space-x-3 p-2 rounded-md hover:bg-muted/40 transition-colors">
+                                  <Checkbox 
+                                    checked={field.value?.includes(item.id)} 
+                                    onCheckedChange={(checked) => {
                                         return checked ? field.onChange([...(field.value || []), item.id]) : field.onChange(field.value?.filter((value) => value !== item.id))
-                                    }} />
-                                </FormControl>
-                                <FormLabel className="font-normal">{item.label}</FormLabel>
-                            </FormItem>
-                        ))}
-                    </div>
+                                    }} 
+                                    className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                                  />
+                                  <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">{item.label}</label>
+                              </div>
+                          ))}
+                      </div>
+                    </FormControl>
                     <FormMessage />
                 </FormItem>
             )} />
@@ -233,9 +281,13 @@ export function BrandBriefForm({ onFormSubmit }: BrandBriefFormProps) {
         </div>
 
         {/* --- FORM ACTIONS --- */}
-        <div className="flex justify-end gap-4 pt-8">
-            <Button type="button" variant="secondary" onClick={loadTemplate}>Load Template</Button>
-            <Button type="submit">Find Creators</Button>
+        <div className="flex justify-end gap-4 pt-8 border-t border-border">
+            <Button type="button" variant="outline" onClick={loadTemplate} className="min-w-[140px] h-11">
+              Load Template
+            </Button>
+            <Button type="submit" className="min-w-[140px] h-11 bg-primary hover:bg-primary/90">
+              Find Creators
+            </Button>
         </div>
       </form>
     </Form>

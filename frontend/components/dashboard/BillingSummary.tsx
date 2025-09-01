@@ -97,8 +97,16 @@ export function BillingSummary({ brandData, creatorData, onEdit }: BillingSummar
         </CardContent>
       </Card>
 
-      {/* --- NEW MODAL-BASED ACTIONS SECTION --- */}
-      <div className="flex justify-end pt-4">
+      {/* --- ACTIONS SECTION --- */}
+      <div className="flex justify-between items-center pt-6">
+        <div className="flex gap-3">
+          <Button variant="outline" onClick={() => onEdit('brand')}>
+            Edit Brand Details
+          </Button>
+          <Button variant="outline" onClick={() => onEdit('creator')}>
+            Edit Creator Details
+          </Button>
+        </div>
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogTrigger asChild>
             <Button disabled={instance.loading}>

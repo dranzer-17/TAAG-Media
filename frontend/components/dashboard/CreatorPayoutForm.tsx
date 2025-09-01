@@ -156,14 +156,19 @@ export function CreatorPayoutForm({ onCreatorSubmit, onBack }: CreatorPayoutForm
           )}
         />
 
-        <div className="flex justify-between pt-4">
-          <Button type="button" variant="outline" onClick={onBack}>
+        {/* Form Actions */}
+        <div className="flex justify-between items-center pt-8 border-t border-border">
+          <Button type="button" variant="outline" onClick={onBack} className="min-w-[100px]">
             Back
           </Button>
-                <Button type="button" variant="secondary" onClick={loadSample}>
+          <div className="flex gap-3">
+            <Button type="button" variant="secondary" onClick={loadSample} className="min-w-[120px]">
               Load Sample
             </Button>
-          <Button type="submit">View Summary</Button>
+            <Button type="submit" className="min-w-[120px]">
+              View Summary
+            </Button>
+          </div>
         </div>
       </form>
     </Form>

@@ -1,85 +1,225 @@
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle"; // Import the toggle
-import { ArrowRight, Zap, Target, FileText } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { 
+  ArrowRight, 
+  Zap, 
+  Target, 
+  FileText,
+  Users,
+  TrendingUp,
+  Shield,
+  Sparkles,
+  CheckCircle,
+  Star
+} from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-full bg-background text-foreground aurora-background">
+    <div className="min-h-screen w-full bg-gradient-to-br from-background via-background to-muted/20">
       {/* Header */}
-      <header className="container mx-auto px-6 py-4">
-        <nav className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">
-            Taag<span className="text-blue-500">.</span>
-          </h1>
-          <div className="flex items-center gap-4">
-            <Link href="/login">
-              <Button variant="ghost">Login</Button>
-            </Link>
-            <ThemeToggle />
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+        <nav className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-2">
+              <div className="relative">
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
+              </div>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                Taag Media
+              </h1>
+            </div>
+            <div className="flex items-center gap-4">
+              <Button variant="ghost" className="hover:bg-muted/50 transition-colors">
+                Features
+              </Button>
+              <Button variant="ghost" className="hover:bg-muted/50 transition-colors">
+                About
+              </Button>
+              <Link href="/login">
+                <Button variant="outline" className="border-border/50 hover:bg-muted/50">
+                  Sign In
+                </Button>
+              </Link>
+              <ThemeToggle />
+            </div>
           </div>
         </nav>
       </header>
 
-      {/* Main Content */}
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="container mx-auto px-6 text-center pt-24 pb-32">
-          <h2 className="text-5xl md:text-7xl font-extrabold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-            Intelligent Creator Matching
-          </h2>
-          <p className="mt-6 max-w-2xl mx-auto text-lg text-slate-400">
-            Connect your brand with the perfect creators using our AI-powered platform.
-            Seamlessly match, manage, and process payments.
+      {/* Hero Section */}
+      <section className="container mx-auto px-6 pt-20 pb-32">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border/50 mb-8">
+            <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+            <span className="text-sm font-medium text-muted-foreground">
+              AI-Powered Creator Matching Platform
+            </span>
+          </div>
+
+          {/* Main Headline */}
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+            <span className="bg-gradient-to-r from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent">
+              Connect Brands with
+            </span>
+            <br />
+            <span className="bg-gradient-to-r from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent">
+              Perfect Creators
+            </span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+            Leverage AI to discover, match, and manage creator partnerships that drive real results. 
+            Streamlined billing and payments included.
           </p>
-          <div className="mt-10">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-lg shadow-blue-600/20">
-              Get Started Now
-              <ArrowRight className="ml-2 h-5 w-5" />
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <Link href="/login">
+              <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                Start Matching Now
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Button size="lg" variant="outline" className="border-border/50 hover:bg-muted/50 transition-colors">
+              Watch Demo
             </Button>
           </div>
-        </section>
 
-        {/* Features Section - with Glassmorphism */}
-        <section className="container mx-auto px-6 pb-32">
-          <div className="grid gap-8 md:grid-cols-3">
-            <GlassFeatureCard
-              icon={<Zap className="h-8 w-8 text-blue-400" />}
-              title="AI-Powered Matching"
-              description="Our algorithm finds creators that perfectly align with your brand's goals, audience, and tone."
-            />
-            <GlassFeatureCard
-              icon={<Target className="h-8 w-8 text-blue-400" />}
-              title="Audience Fit Scoring"
-              description="Ensure you reach the right people with a detailed score based on audience demographics and location."
-            />
-            <GlassFeatureCard
-              icon={<FileText className="h-8 w-8 text-blue-400" />}
-              title="Streamlined Billing"
-              description="Easily capture brand and creator details with built-in validation and automated tax calculation."
-            />
+          {/* Social Proof */}
+          <div className="flex flex-wrap justify-center items-center gap-8 text-muted-foreground text-sm">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-emerald-500" />
+              <span>10,000+ Active Creators</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-emerald-500" />
+              <span>500+ Brands Trust Us</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-emerald-500" />
+              <span>98% Match Success Rate</span>
+            </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="container mx-auto px-6 pb-32">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+            Everything You Need to Scale
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            From intelligent matching to seamless payments, we've built the complete creator marketing solution.
+          </p>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <FeatureCard
+            icon={<Zap className="h-6 w-6" />}
+            title="AI-Powered Matching"
+            description="Our advanced algorithm analyzes 50+ data points to find creators that perfectly align with your brand's voice, audience, and goals."
+            gradient="from-blue-500 to-cyan-500"
+          />
+          <FeatureCard
+            icon={<Target className="h-6 w-6" />}
+            title="Precision Audience Scoring"
+            description="Get detailed audience overlap scores with demographic breakdowns, engagement rates, and geographic distribution analysis."
+            gradient="from-purple-500 to-pink-500"
+          />
+          <FeatureCard
+            icon={<FileText className="h-6 w-6" />}
+            title="Streamlined Billing"
+            description="Automated invoicing, tax calculations, and secure payment processing. Handle everything from contracts to payouts seamlessly."
+            gradient="from-emerald-500 to-teal-500"
+          />
+          <FeatureCard
+            icon={<Users className="h-6 w-6" />}
+            title="Creator Network"
+            description="Access our vetted network of 10,000+ creators across all major platforms, from nano to macro influencers."
+            gradient="from-orange-500 to-red-500"
+          />
+          <FeatureCard
+            icon={<TrendingUp className="h-6 w-6" />}
+            title="Performance Analytics"
+            description="Track campaign performance in real-time with detailed metrics, ROI calculations, and comprehensive reporting."
+            gradient="from-indigo-500 to-purple-500"
+          />
+          <FeatureCard
+            icon={<Shield className="h-6 w-6" />}
+            title="Secure & Compliant"
+            description="Enterprise-grade security with automated tax compliance, fraud detection, and secure payment processing."
+            gradient="from-slate-500 to-gray-500"
+          />
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="container mx-auto px-6 pb-32">
+        <div className="rounded-3xl bg-gradient-to-r from-muted/30 via-muted/50 to-muted/30 border border-border/50 p-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <StatItem number="10K+" label="Active Creators" />
+            <StatItem number="500+" label="Happy Brands" />
+            <StatItem number="98%" label="Match Success" />
+            <StatItem number="$2M+" label="Processed Payments" />
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border/50 bg-muted/20">
+        <div className="container mx-auto px-6 py-12">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="flex items-center space-x-2 mb-4 md:mb-0">
+              <span className="text-lg font-semibold">Taag Media</span>
+            </div>
+            <div className="flex items-center gap-6 text-sm text-muted-foreground">
+              <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
+              <a href="#" className="hover:text-foreground transition-colors">Terms</a>
+              <a href="#" className="hover:text-foreground transition-colors">Contact</a>
+            </div>
+          </div>
+          <div className="mt-8 pt-8 border-t border-border/50 text-center text-sm text-muted-foreground">
+            © 2024 Taag Media. All rights reserved. Built for the future of creator marketing.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
 
-// Reusable Glassmorphism Feature Card
-function GlassFeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
+function FeatureCard({ 
+  icon, 
+  title, 
+  description, 
+  gradient 
+}: { 
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  gradient: string;
+}) {
   return (
-    <div className="
-      p-8 rounded-2xl
-      bg-white/5 border border-white/10
-      backdrop-blur-lg
-      shadow-2xl shadow-black/20
-      transform hover:-translate-y-2 transition-transform duration-300
-    ">
-      <div className="bg-slate-900/50 border border-white/10 p-3 rounded-full w-fit">
-        {icon}
+    <div className="group relative">
+      <div className="relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-8 transition-all duration-300 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 hover:border-border">
+        <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${gradient} text-white mb-6 shadow-lg`}>
+          {icon}
+        </div>
+        <h3 className="text-xl font-semibold text-foreground mb-3">{title}</h3>
+        <p className="text-muted-foreground leading-relaxed">{description}</p>
       </div>
-      <h3 className="mt-6 text-xl font-bold text-slate-100">{title}</h3>
-      <p className="mt-2 text-slate-400">{description}</p>
+    </div>
+  );
+}
+
+function StatItem({ number, label }: { number: string; label: string }) {
+  return (
+    <div>
+      <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">{number}</div>
+      <div className="text-muted-foreground text-sm font-medium">{label}</div>
     </div>
   );
 }

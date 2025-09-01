@@ -60,7 +60,7 @@ export function BrandBillingForm({ onBrandSubmit }: BrandBillingFormProps) {
   const loadSample = () => {
     form.reset(sampleBrandBilling);
   };
-  
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -157,11 +157,14 @@ export function BrandBillingForm({ onBrandSubmit }: BrandBillingFormProps) {
             )}
           />
 
-        <div className="flex justify-end pt-4">
-            <Button type="button" variant="secondary" onClick={loadSample}>
-                Load Sample Data
-            </Button>
-          <Button type="submit">Next: Creator Payout</Button>
+        {/* Form Actions */}
+        <div className="flex justify-between items-center pt-8 border-t border-border">
+          <Button type="button" variant="secondary" onClick={loadSample} className="min-w-[140px]">
+            Load Sample Data
+          </Button>
+          <Button type="submit" className="min-w-[140px]">
+            Next: Creator Payout
+          </Button>
         </div>
       </form>
     </Form>
