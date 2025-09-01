@@ -1,0 +1,70 @@
+# --- Python ---
+# Virtual Environments
+venv/
+.venv/
+env/
+.env/
+ENV/
+
+# Byte-compiled / optimized / C extensions
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg
+*.whl
+
+# --- FastAPI/Uvicorn ---
+# Uvicorn's temporary stats files (if used)
+.uvicorn.shm
+
+# --- Database ---
+# Ignore our specific SQLite database file
+taag.db
+
+# Ignore other common database file extensions
+*.db
+*.sqlite
+*.sqlite3
+
+# --- Environment Variables ---
+# Ignore all .env files to keep secrets and local configs out of git
+.env
+.env.*
+# But DO commit the example file
+! .env.example
+
+# --- IDEs and Editors ---
+# Visual Studio Code
+.vscode/
+# JetBrains (PyCharm, IntelliJ)
+.idea/
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+# Vim
+*.swp
+*.swo
+
+# --- Operating System Files ---
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
