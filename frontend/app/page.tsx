@@ -58,7 +58,7 @@ export default function Home() {
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-muted/50 border border-border/50 mb-6 sm:mb-8">
             <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
             <span className="text-xs sm:text-sm font-medium text-muted-foreground">
-              AI-Powered Creator Matching Platform
+              AI-Powere d Creator Matching Platform
             </span>
           </div>
 
