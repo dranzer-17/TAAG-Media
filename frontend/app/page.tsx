@@ -42,7 +42,7 @@ export default function Home() {
               </Button>
               <Link href="/login">
                 <Button variant="outline" className="border-border/50 hover:bg-muted/50 text-xs sm:text-sm px-3 sm:px-4">
-                  Sign In
+                  Sign-In
                 </Button>
               </Link>
               <ThemeToggle />
