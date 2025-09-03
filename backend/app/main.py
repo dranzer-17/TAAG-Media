@@ -42,25 +42,6 @@ def read_root():
     """A simple endpoint to confirm the API is running."""
     return {"status": "ok", "message": "Welcome to the Match & Bill API!"}
 
-@app.post("/api/match", response_model=List[schemas.MatchedCreator])
-def get_matches(brief: schemas.BrandBrief, db: Session = Depends(get_db)):
-    """
-    Takes a brand brief and returns a ranked list of matched creators.
-    """
-    # 1. Fetch all creators from the database
-    all_creators = crud.get_creators(db, limit=1000) # Get all creators
-    
-    # 2. Score each creator against the brief
-    scored_creators = [
-        scoring.calculate_final_score(brief, creator) for creator in all_creators
-    ]
-    
-    # 3. Sort creators by score in descending order
-    sorted_creators = sorted(scored_creators, key=lambda c: c.score, reverse=True)
-
-    # 4. TODO: Implement the diversification rule
-    
-    return sorted_creators
 
 @app.post("/api/match", response_model=List[schemas.MatchedCreator])
 def get_matches(brief: schemas.BrandBrief, db: Session = Depends(get_db)):
